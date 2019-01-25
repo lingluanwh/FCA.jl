@@ -1,7 +1,7 @@
 # Indepndent component factorization (ICF) based on Independent component analysis (ICA)
 # We will compare FCF with ICF
 
-include("orthopt.jl")
+# include("orthopt.jl")
 
 # Independent component factorization based on ICA
 function icf(Z::Array{Array{D, 1}, 1}; opt_method = "orth") where D <: Number

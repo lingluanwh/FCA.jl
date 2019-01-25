@@ -1,5 +1,3 @@
-include("orthopt.jl")
-
 function freecf(Z; mat_type="her", obj_type="kurt", opt_method="orth")
     #--------------------------------------------------------------------------
     # Syntax:       Aest, Xest = freecf(Z, obj_type = "ent")

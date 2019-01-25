@@ -1,4 +1,4 @@
-using Optim
+#using Optim
 
 function OptOrtho(loss, grad, s)
     #--------------------------------------------------------------------------

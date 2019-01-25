@@ -44,5 +44,7 @@ include("fcf.jl")
 include("free_whiten.jl")
 include("embed.jl")
 include("icf.jl")
+include("orthopt.jl")
+
 end
 
