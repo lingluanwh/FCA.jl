@@ -1,6 +1,5 @@
- test/test_ipynb/*
- .DS_Store
- 
- example/video components/*
- activate
- Project.toml
+test/test_ipynb/*
+.DS_Store
+
+.ipynb_checkpoints/
+example/video components/*
