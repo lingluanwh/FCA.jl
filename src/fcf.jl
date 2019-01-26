@@ -20,6 +20,11 @@ function freecf(Z; mat_type="her", obj_type="kurt", opt_method="orth")
     # 
     # Date:         Jan 20, 2019
     #--------------------------------------------------------------------------
+    
+    # freecf is not designed for obj_type = "ent" and opt_method = "sphe"
+    if (obj_type == "ent") & (opt_method == "sphe")
+        error("Spherical optimization is not designed for entropy based fcf!")
+    end
 
     # get the dimension of each matrix
     N, M = size(Z[1])
