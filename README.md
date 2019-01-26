@@ -27,5 +27,6 @@ Z = A*X
 Aest, Xest = freecf(Z)
 
 # Aest recover A upto column permutation and column rescaling.
+using LinearAlgebra
 @show pinv(Aest)*A # their product should approximate a diagonal matrix
 ```
