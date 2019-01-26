@@ -18,7 +18,7 @@ G1, G2 = randn(N,N), randn(N,2*N)
 X1 = (G1+G1')/sqrt(N)
 X2 = (G2*G2')/2N
 
-# mixed X1, X2 linearly
+# mix X1, X2 linearly
 A = randn(2,2) # mixing matrix
 X = [X1, X2]
 Z = A*X
