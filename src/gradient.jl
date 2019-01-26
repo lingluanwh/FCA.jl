@@ -1,5 +1,5 @@
 # function grad_neg_abs_sum_free_kurt(W::Array{T}, Y::Array{Array{T,2},1}) where T <: Number
-using Statistics
+# using Statistics
 
 function grad_neg_abs_sum_free_kurt(W, Y)
     #--------------------------------------------------------------------------
