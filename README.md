@@ -24,7 +24,7 @@ X = [X1, X2];
 A = randn(2,2) # mixing matrix
 Z = A*X
 
-# recover mixing matrix and free components using freecf
+# use freecf to recover mixing matrix and free components (up to permutation and rescaling)
 Aest, Xest = freecf(Z; mat = "rec") # "rec" tells the function that we are dealing with the rectangular matrices
 
 # Aest recover A upto column permutation and column rescaling.
