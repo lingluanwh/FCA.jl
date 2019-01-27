@@ -10,23 +10,23 @@ julia> Pkg.clone("https://github.com/lingluanwh/fca.jl.git")
 A typical example of the usage of fca.jl is
 ```julia
 # separate symetric freely independent random matrices out of their additive mixture
-using fca
+using fca, LinearAlgebra
 
-# generate freely two symmetric freely independent random matrices X1 and X2
-N = 300
-G1, G2 = randn(N,N), randn(N,2*N)
-X1 = (G1+G1')/sqrt(N)
-X2 = (G2*G2')/2N
+# generate freely two freely independent rectangular random matrices X1 and X2
+N, M = 300, 500
+X1 = randn(N, M) / sqrt(M)
+U, V = Matrix(qr(randn(N,N)).Q), Matrix(qr(randn(M,M)).Q)
+D = [Diagonal((collect(range(1,stop = 0,length = N)) .- 1).^4) zeros(N, M - N)]
+X2 = U*D*V'
+X = [X1, X2];
 
 # mix X1, X2 linearly
 A = randn(2,2) # mixing matrix
-X = [X1, X2]
 Z = A*X
 
 # recover mixing matrix and free components using freecf
-Aest, Xest = freecf(Z)
+Aest, Xest = freecf(Z; mat = "rec") # "rec" tells the function that we are dealing with the rectangular matrices
 
 # Aest recover A upto column permutation and column rescaling.
-using LinearAlgebra
 @show pinv(Aest)*A # their product should approximate a diagonal matrix
 ```
