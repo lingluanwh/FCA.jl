@@ -9,7 +9,7 @@ julia> Pkg.clone("https://github.com/lingluanwh/fca.jl.git")
 ## Example
 A typical example of the usage of fca.jl is
 ```julia
-# separate symetric freely independent random matrices out of their additive mixture
+# separate freely independent rectangular random matrices out of their additive mixture
 using fca, LinearAlgebra
 
 # generate freely two freely independent rectangular random matrices X1 and X2
