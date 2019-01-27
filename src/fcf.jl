@@ -1,13 +1,13 @@
-function freecf(Z; mat_type="her", obj_type="kurt", opt_method="orth")
+function freecf(Z; mat="her", obj="kurt", opt="orth")
     #--------------------------------------------------------------------------
-    # Syntax:       Aest, Xest = freecf(Z, obj_type = "ent")
-    #               Aest, Xest = freecf(Z, mat_type = "rec")
-    #               Aest, Xest = freecf(Z, opt_method = "sphe")
+    # Syntax:       Aest, Xest = freecf(Z, obj = "ent")
+    #               Aest, Xest = freecf(Z, mat = "rec")
+    #               Aest, Xest = freecf(Z, opt = "sphe")
     #
-    # Input:        Z: an array of matrices of mat_type and of the same dimensions
-    #               mat_type: the type of Z[i], valid options are "her" and "rec"
-    #               obj_type: the type of loss function, valid options are "kurt" and "ent"
-    #               opt_method: string, valid option: "orth", "sphe"
+    # Input:        Z: an array of matrices of mat and of the same dimensions
+    #               mat: the type of Z[i], valid options are "her" and "rec"
+    #               obj: the type of loss function, valid options are "kurt" and "ent"
+    #               opt: string, valid option: "orth", "sphe"
     #
     # Outputs:      Aest: a matrix of size s-by-s
     #               Xest: an array of "free" matrices, such that Z = Aest*Xest
@@ -21,8 +21,8 @@ function freecf(Z; mat_type="her", obj_type="kurt", opt_method="orth")
     # Date:         Jan 20, 2019
     #--------------------------------------------------------------------------
     
-    # freecf is not designed for obj_type = "ent" and opt_method = "sphe"
-    if (obj_type == "ent") & (opt_method == "sphe")
+    # freecf is not designed for obj = "ent" and opt = "sphe"
+    if (obj == "ent") & (opt == "sphe")
         error("Spherical optimization is not designed for entropy based fcf!")
     end
 
@@ -30,17 +30,17 @@ function freecf(Z; mat_type="her", obj_type="kurt", opt_method="orth")
     N, M = size(Z[1])
     s = size(Z, 1)
     
-    # check whether the dimension with the mat_type
-    if (mat_type == "sym") && (N != M)
+    # check whether the dimension with the mat
+    if (mat == "sym") && (N != M)
         error("The input components are not a Hermitian matrix")
     end
     
     # whiten the data
-    Y, U, Σ = free_whiten(Z; mat_type = mat_type);
+    Y, U, Σ = free_whiten(Z; mat = mat);
     
     # assign the objective function and derivative according to 
-    # obj_type and mat_type
-    if obj_type == "kurt"
+    # obj and mat
+    if obj == "kurt"
         # if we use kurtosis based cost function
         # obj function
         F = (W, Y) -> neg_abs_sum_free_kurt(W[:,:]'*Y);
@@ -48,19 +48,19 @@ function freecf(Z; mat_type="her", obj_type="kurt", opt_method="orth")
         # derivative of obj function
         grad_F = (W, Y) -> grad_neg_abs_sum_free_kurt(W, Y);
         
-    elseif obj_type == "ent"
+    elseif obj == "ent"
         # if we use entropy based cost function
         # obj function
-        F = (W, Y) -> sum_free_ent(W[:,:]'*Y; mat_type = mat_type);
+        F = (W, Y) -> sum_free_ent(W[:,:]'*Y; mat = mat);
         
         # derivative of obj function
-        grad_F = (W, Y) -> grad_sum_free_ent(W, Y; mat_type = mat_type);
+        grad_F = (W, Y) -> grad_sum_free_ent(W, Y; mat = mat);
     end
     
     # optimization over the orthogonal matrix
-    if opt_method == "orth"
+    if opt == "orth"
         What = OptOrtho(W -> F(W, Y), W -> grad_F(W, Y), s);
-    elseif opt_method == "sphe"
+    elseif opt == "sphe"
         # recover the columns of W one-by-one 
         # first column
         What = reshape(OptSphere(W -> F(W, Y), W -> grad_F(W, Y), s), :, 1)

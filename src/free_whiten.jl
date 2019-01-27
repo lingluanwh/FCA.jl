@@ -1,10 +1,10 @@
-function mat_center(X::Array{T,2}; mat_type = "her") where T <: Number
+function mat_center(X::Array{T,2}; mat = "her") where T <: Number
     #--------------------------------------------------------------------------
     # Syntax:       Xcen = mat_center(X, "her")
     #               Xcen = mat_center(X, "rec")
     # 
     # Input:        X: a Hermitian or rectangular matrix
-    #               mat_type: the type of X, valid options are "her" and "rec"
+    #               mat: the type of X, valid options are "her" and "rec"
     #
     # Outputs:      Xcen: a matrix of the same type as X. 
     #   
@@ -19,13 +19,13 @@ function mat_center(X::Array{T,2}; mat_type = "her") where T <: Number
     #--------------------------------------------------------------------------
 
     N, M = size(X)
-    if mat_type == "her"
+    if mat == "her"
         # for Hermitian matrix, X = X - I*tr(X)/N
         if M != N
             error("X should be a symmetric matrix")
         end
         return X - I*tr(X)/M
-    elseif mat_type == "rec"
+    elseif mat == "rec"
         # for rectangular matrix, A = A - A*ones(m, 1)*ones(1, m)/m
         return X - X*ones(M, 1)/M * ones(1, M)
     end
@@ -33,13 +33,13 @@ end
 
 
 # for an array of matrix, whiten the array under the convention of free probability
-function free_whiten(Z::Array{Array{T, 2}}; mat_type = "her") where T <: Number
+function free_whiten(Z::Array{Array{T, 2}}; mat = "her") where T <: Number
     #--------------------------------------------------------------------------
     # Syntax:       Y, U, Σ = free_whiten(Z, "her")
     #               Y, U, Σ = free_whiten(Z, "rec")
     #
-    # Input:        Z: an array of matrices of mat_type and of the same dimensions
-    #               mat_type: the type of Z[i], valid options are "her" and "rec"
+    # Input:        Z: an array of matrices of mat and of the same dimensions
+    #               mat: the type of Z[i], valid options are "her" and "rec"
     #
     # Outputs:      Y: an array of centered matrices, whitened in the free probability sense,
     #                   that is, Tr(Y[i]*Y[j]')/size(Y[1],1) = (i == j)
@@ -54,7 +54,7 @@ function free_whiten(Z::Array{Array{T, 2}}; mat_type = "her") where T <: Number
     # Date:         Jan 20, 2019
     #--------------------------------------------------------------------------
 
-    Zc = mat_center.(Z; mat_type = mat_type)
+    Zc = mat_center.(Z; mat = mat)
     N = size(Zc[1], 1)
     # compute the cov matrix such that
     # cov[i,j] = tr(Zc[i]*Zc[j]')/N
@@ -68,6 +68,6 @@ function free_whiten(Z::Array{Array{T, 2}}; mat_type = "her") where T <: Number
 end
 
 # if Z is just a single matrix, we first convert it to [Y].
-function free_whiten(Z::Array{T, 2}; mat_type = "her") where T <: Number
-    return free_whiten([Z]; mat_type = mat_type)
+function free_whiten(Z::Array{T, 2}; mat = "her") where T <: Number
+    return free_whiten([Z]; mat = mat)
 end

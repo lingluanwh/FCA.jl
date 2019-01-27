@@ -50,9 +50,9 @@ function grad_neg_abs_sum_free_kurt(W, Y)
     return grad
 end
 
-# function grad_sum_free_ent(W::Array{T}, Y::Array{Array{T,2},1}, mat_type = "her") where T <: Number
+# function grad_sum_free_ent(W::Array{T}, Y::Array{Array{T,2},1}, mat = "her") where T <: Number
 
-function grad_sum_free_ent(W, Z; mat_type = "her")
+function grad_sum_free_ent(W, Z; mat = "her")
     #--------------------------------------------------------------------------
     # Syntax:       grad = grad_sum_free_ent(W, Z)
     # 
@@ -92,7 +92,7 @@ function grad_sum_free_ent(W, Z; mat_type = "her")
     
     # Compute the gradient
     # self-adjoint case
-    if mat_type == "her"
+    if mat == "her"
         for l = 1: size(grad, 2)
             eigres = eigen(X[l])
             Λ, V = eigres.values, eigres.vectors
@@ -104,7 +104,7 @@ function grad_sum_free_ent(W, Z; mat_type = "her")
     end
     
     # rectangular case                        
-    if mat_type == "rec"
+    if mat == "rec"
         a, b = N/(N + M), M/(N + M)
         for l = 1: size(grad, 2)
             eigres = eigen(X[l]*X[l]')

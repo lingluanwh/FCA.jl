@@ -17,7 +17,7 @@ x = [2,1,3,-2,-1,-3]
     end
 end
 
-@testset "Test icf $opt_method" for opt_method in ["orth", "sphe"]  
+@testset "Test icf $opt" for opt in ["orth", "sphe"]  
     for idx = 1: 10
         # set up
         T = 100000
@@ -26,7 +26,7 @@ end
         z = A*x;
 
         # apply icf
-        Aest = icf(z; opt_method = opt_method)[1]
+        Aest = icf(z; opt = opt)[1]
         @test err_pd(pinv(Aest)*A) < 5e-2
     end
 end

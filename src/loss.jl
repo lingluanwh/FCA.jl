@@ -44,13 +44,13 @@ function neg_abs_sum_free_kurt(Z)
     return -sum(abs.(κ₄.(Z)))
 end
 
-function free_ent(X; mat_type = "her")
+function free_ent(X; mat = "her")
     #--------------------------------------------------------------------------
     # Syntax:       chi = free_ent(X, "her")
     #               chi = free_ent(X, "rec")
     # 
     # Input:        X is a Hermitian or rectangular matrice
-    #               mat_type is the type of X, valid options are "her" and "rec"
+    #               mat is the type of X, valid options are "her" and "rec"
     #
     # Outputs:      chi is a scalr, it is the free entropy of X
     #   
@@ -67,13 +67,13 @@ function free_ent(X; mat_type = "her")
     
     # compute the entropy
     # self-adjoint case
-    if mat_type == "her"
+    if mat == "her"
         Λ = eigvals(Hermitian(X))
         ent = mean(log.(abs.([Λ[i] - Λ[j] for i = 1:N for j = (i + 1):N])))
     end
                             
     # rectangular case                       
-    if mat_type == "rec"
+    if mat == "rec"
         a, b = N/(N + M), M/(N + M)
         Λ = svdvals(X*X')  
         ent = a^2 * mean(log.(abs.([Λ[i] - Λ[j] for i = 1:N for j = (i + 1):N]))) + a*(b - a)*mean(log.(abs.(Λ)))
@@ -82,13 +82,13 @@ function free_ent(X; mat_type = "her")
     return ent                                               
 end
                                                     
-function sum_free_ent(Z; mat_type = "her")
+function sum_free_ent(Z; mat = "her")
     #--------------------------------------------------------------------------
     # Syntax:       sum_chi = sum_free_ent(Z, "her")
     #               sum_chi = sum_free_ent(Z, "rec")
     # 
     # Input:        Z: a array of Hermitian or rectangular matrices
-    #               mat_type is the type of X, valid options are "her" and "rec"
+    #               mat is the type of X, valid options are "her" and "rec"
     #
     # Outputs:      sum_chi: a scalr, it is the summation of free entropy of Z[i]
     #   
@@ -101,5 +101,5 @@ function sum_free_ent(Z; mat_type = "her")
     # Date:         Jan 20, 2019
     #--------------------------------------------------------------------------
     
-    return sum(free_ent.(Z, mat_type = mat_type))                                                   
+    return sum(free_ent.(Z, mat = mat))                                                   
 end

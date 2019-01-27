@@ -4,13 +4,13 @@
 # include("orthopt.jl")
 
 # Independent component factorization based on ICA
-function icf(Z::Array{Array{D, 1}, 1}; opt_method = "orth") where D <: Number
+function icf(Z::Array{Array{D, 1}, 1}; opt = "orth") where D <: Number
     #--------------------------------------------------------------------------
-    # Syntax:       Aest, Xest = icf(Z, opt_method = "orth")
+    # Syntax:       Aest, Xest = icf(Z, opt = "orth")
     # 
     # Input:        Z: an array of vectors of the same length, represent the
     #                   realizations of mixed independent signals
-    #               opt_method: string, valid option: "orth", "sphe"
+    #               opt: string, valid option: "orth", "sphe"
     #                       
     # Outputs:      Aest: estimated mixing matrix of size s-by-s, where s = size(Z,1)
     #               Xest: estimated independent component Xest = pinv(Aest)*Z
@@ -44,7 +44,7 @@ function icf(Z::Array{Array{D, 1}, 1}; opt_method = "orth") where D <: Number
     # find the orthogonal matrix minimizer neg_abs_sum_kurt
     
     # optimization using optim
-    if opt_method == "orth"
+    if opt == "orth"
         # loss function
         F = W -> neg_abs_sum_kurt(W'*Y)
 
@@ -53,7 +53,7 @@ function icf(Z::Array{Array{D, 1}, 1}; opt_method = "orth") where D <: Number
 
         # using Stiefel manifold
         W = OptOrtho(F, grad_F, s)
-    elseif opt_method == "sphe"
+    elseif opt == "sphe"
         # using Sphere manifold and find one column at a time
         # loss function
         F = W -> neg_abs_sum_kurt(W[:,:]'*Y)
