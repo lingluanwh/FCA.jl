@@ -39,6 +39,6 @@ This package is provided as is under the MIT License.
 
 Hao Wu
 
-lingluan@umich.com
+lingluan@umich.edu
 
 University of Michigan, Department of Mathematics
