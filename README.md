@@ -30,3 +30,15 @@ Aest, Xest = freecf(Z; mat = "rec") # "rec" tells the function that we are deali
 # Aest recover A upto column permutation and column rescaling.
 @show pinv(Aest)*A # their product should approximate a diagonal matrix
 ```
+
+## License
+
+This package is provided as is under the MIT License. 
+
+## Author
+
+Hao Wu
+
+lingluan@umich.com
+
+University of Michigan, Department of Mathematics
