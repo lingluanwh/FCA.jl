@@ -1,5 +1,5 @@
 push!(LOAD_PATH, "../src/")
-using fca
+using FCA
 using Test
 using Combinatorics, ForwardDiff, LinearAlgebra, Statistics
 

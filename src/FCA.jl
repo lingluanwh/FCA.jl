@@ -4,7 +4,7 @@
 Module providing the free componant analysis (FCA) algorithm.
 """
 
-module fca
+module FCA
 
 # Package requried
 using Optim # for manifold optimization
