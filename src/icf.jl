@@ -1,29 +1,22 @@
 # Indepndent component factorization (ICF) based on Independent component analysis (ICA)
 # We will compare FCF with ICF
 
-# include("orthopt.jl")
+"""
+    icf(Z, opt = "orth")
 
-# Independent component factorization based on ICA
+Apply independent component analysis to Z, return estimated 
+mixing matrix and independent components
+
+# Inputs
+-   Z: an array of vectors of the same length, represent the
+       realizations of mixed independent signals
+
+# Outputs
+-   Aest: estimated mixing matrix of size s-by-s, where s = size(Z,1)
+-   Xest: estimated independent component Xest = pinv(Aest)*Z
+"""
+
 function icf(Z::Array{Array{D, 1}, 1}; opt = "orth") where D <: Number
-    #--------------------------------------------------------------------------
-    # Syntax:       Aest, Xest = icf(Z, opt = "orth")
-    # 
-    # Input:        Z: an array of vectors of the same length, represent the
-    #                   realizations of mixed independent signals
-    #               opt: string, valid option: "orth", "sphe"
-    #                       
-    # Outputs:      Aest: estimated mixing matrix of size s-by-s, where s = size(Z,1)
-    #               Xest: estimated independent component Xest = pinv(Aest)*Z
-    #   
-    # Description:  Apply independent component analysis to Z, return estimated
-    #               mixing matrix and independent components
-    #
-    # Authors:      Hao Wu
-    #               lingluanwh@gmail.com
-    # 
-    # Date:         Jan 20, 2019
-    #--------------------------------------------------------------------------  
-
     # get number of the components and the dimension of each components
     s = size(Z,1)
     T = size(Z[1],1)
@@ -85,31 +78,32 @@ function icf(Z::Array{Array{D, 1}, 1}; opt = "orth") where D <: Number
     
     Aest = U*Σ*U'*W
     xest = pinv(Aest) * Z
+
     return Aest, xest
 end
 
-function neg_abs_sum_kurt(Z)
-    #--------------------------------------------------------------------------
-    # Syntax:       F = neg_abs_sum_kurt(Z)
-    # 
-    # Input:        Z: an array of vectors of the same length, regarded as the
-    #                   realizations of mixed independent signals
-    #                       
-    # Outputs:      F: a scalar, summation of negative absolute value 
-    #                   of kurtosis of Z[i]
-    #
-    # Description:  Apply independent component analysis to Z, return estimated
-    #               mixing matrix and independent components
-    #
-    # Authors:      Hao Wu
-    #               lingluanwh@gmail.com
-    # 
-    # Date:         Jan 20, 2019
-    #-------------------------------------------------------------------------- 
 
+"""
+    neg_abs_sum_kurt(Z)
+
+Calculate the sum of negative absolute value of kurtosis of rows of Z
+"""
+
+function neg_abs_sum_kurt(Z)
     return -sum(abs.(kurt.(Z)))
 end
 
+"""
+    kurt(z)
+
+This function returns the kurtosis of z   
+
+# Inputs
+-   z: an vector regarded as independent realizations of a random variables
+
+# Outputs
+-   k: a scalar, kurtosis of z
+"""
 function kurt(z)
     #--------------------------------------------------------------------------
     # Syntax:       k = kurt(z)
@@ -125,29 +119,25 @@ function kurt(z)
     # 
     # Date:         Jan 20, 2019
     #-------------------------------------------------------------------------- 
-
-    return mean(z.^4) - 3*mean(z.^2)^2
+    k = mean(z.^4) - 3*mean(z.^2)^2
+    return k
 end
 
-function grad_neg_abs_sum_kurt(W, Z)
-    #--------------------------------------------------------------------------
-    # Syntax:       grad = grad_neg_abs_sum_kurt(W, Z)
-    # 
-    # Input:        W: a matrix such that size(W, 1) = size(Z, 1)
-    #               Z: an array of vectors of the same length, regarded as the
-    #                   realizations of mixed independent signals
-    #                       
-    # Outputs:      grad: the gradient of neg_abs_sum_kurt(W'*Z) w.r.t W
-    #   
-    # Description:  This function calcualtes the gradient of 
-    #               neg_abs_sum_kurt(W'*Z) w.r.t W
-    #
-    # Authors:      Hao Wu
-    #               lingluanwh@gmail.com
-    # 
-    # Date:         Jan 20, 2019
-    #--------------------------------------------------------------------------
+"""
+grad_neg_abs_sum_kurt(W, Z)
 
+This function calcualtes the gradient of neg_abs_sum_kurt(W'*Z) w.r.t W
+
+Inputs       
+-   W: a matrix such that size(W, 1) = size(Z, 1)
+-   Z: an array of vectors of the same length, regarded as the
+       realizations of mixed independent signals
+
+Outputs
+-   grad: the gradient of neg_abs_sum_kurt(W'*Z) w.r.t W
+"""
+
+function grad_neg_abs_sum_kurt(W, Z)
     # get number of components and dimension 
     s = size(Z, 1)
 

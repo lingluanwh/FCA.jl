@@ -1,24 +1,19 @@
 # function grad_neg_abs_sum_free_kurt(W::Array{T}, Y::Array{Array{T,2},1}) where T <: Number
-# using Statistics
+
+"""
+    grad_neg_abs_sum_free_kurt(W, Y)
+
+This function calcualtes the gradient of neg_abs_sum_free_kurt(W'*Y) w.r.t W
+
+# Inputs
+-   W: a matrix such that size(W, 1) = size(Y, 1)
+-   Y: an array of matrix of same type and same dimension
+
+# Outputs
+-   grad: the gradient of neg_abs_sum_free_kurt(W'*Y) w.r.t W
+"""
 
 function grad_neg_abs_sum_free_kurt(W, Y)
-    #--------------------------------------------------------------------------
-    # Syntax:       grad = grad_neg_abs_sum_free_kurt(W, Y)
-    # 
-    # Input:        W: a matrix such that size(W, 1) = size(Y, 1)
-    #               Y: an array of matrix of same type and same dimension
-    #                       
-    # Outputs:      grad: the gradient of neg_abs_sum_free_kurt(W'*Y) w.r.t W
-    #   
-    # Description:  This function calcualtes the gradient of 
-    #               neg_abs_sum_free_kurt(W'*Y) w.r.t W
-    #
-    # Authors:      Hao Wu
-    #               lingluanwh@gmail.com
-    # 
-    # Date:         Jan 20, 2019
-    #--------------------------------------------------------------------------
-
     # convert W to matrix 
     W = W[:, :]
 
@@ -52,24 +47,20 @@ end
 
 # function grad_sum_free_ent(W::Array{T}, Y::Array{Array{T,2},1}, mat = "her") where T <: Number
 
-function grad_sum_free_ent(W, Z; mat = "her")
-    #--------------------------------------------------------------------------
-    # Syntax:       grad = grad_sum_free_ent(W, Z)
-    # 
-    # Input:        W: a matrix such that size(W, 1) = size(Y, 1)
-    #               Y: an array of matrix of same type and same dimension
-    #                       
-    # Outputs:      grad: the gradient of sum_free_ent(W'*Y) w.r.t W
-    #   
-    # Description:  This function calcualtes the gradient of 
-    #               sum_free_ent(W'*Y) w.r.t W
-    #
-    # Authors:      Hao Wu
-    #               lingluanwh@gmail.com
-    # 
-    # Date:         Jan 20, 2019
-    #--------------------------------------------------------------------------
+"""
+    grad_sum_free_ent(W, Z; mat = "her")
 
+This function calcualtes the gradient of sum_free_ent(W'*Y) w.r.t W
+
+# Inputs
+-   W: a matrix such that size(W, 1) = size(Y, 1)
+-   Y: an array of matrix of same type and same dimension
+
+# Outputs
+-   grad: the gradient of sum_free_ent(W'*Y) w.r.t W
+"""
+
+function grad_sum_free_ent(W, Z; mat = "her")
     # convert W to matrix
     W = W[:, :]
     

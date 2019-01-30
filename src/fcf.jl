@@ -1,25 +1,21 @@
+"""      
+    Aest, Xest = freecf(Z; mat="her", obj="kurt", opt="orth")
+
+Apply free component analysis to Z, return estimated
+mixing matrix and free components
+
+# Inputs       
+-   Z: an array of matrices of mat and of the same dimensions
+-   mat: the type of Z[i], valid options are "her" and "rec"
+-   obj: the type of loss function, valid options are "kurt" and "ent"
+-   opt: string, valid option: "orth", "sphe"
+
+# Outputs     
+-   Aest: a matrix of size s-by-s
+-   Xest: an array of "free" matrices, such that Z = Aest*Xest
+"""
+
 function freecf(Z; mat="her", obj="kurt", opt="orth")
-    #--------------------------------------------------------------------------
-    # Syntax:       Aest, Xest = freecf(Z, obj = "ent")
-    #               Aest, Xest = freecf(Z, mat = "rec")
-    #               Aest, Xest = freecf(Z, opt = "sphe")
-    #
-    # Input:        Z: an array of matrices of mat and of the same dimensions
-    #               mat: the type of Z[i], valid options are "her" and "rec"
-    #               obj: the type of loss function, valid options are "kurt" and "ent"
-    #               opt: string, valid option: "orth", "sphe"
-    #
-    # Outputs:      Aest: a matrix of size s-by-s
-    #               Xest: an array of "free" matrices, such that Z = Aest*Xest
-    #   
-    # Description:  Apply free component analysis to Z, return estimated
-    #               mixing matrix and free components
-    # 
-    # Authors:      Hao Wu
-    #               lingluanwh@gmail.com
-    # 
-    # Date:         Jan 20, 2019
-    #--------------------------------------------------------------------------
     
     # freecf is not designed for obj = "ent" and opt = "sphe"
     if (obj == "ent") & (opt == "sphe")

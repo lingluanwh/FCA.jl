@@ -1,27 +1,31 @@
 # This function calculates the free kurtosis of a matrix
 # The function is uniform for both Hermitian or rectangular X
-function κ₄(X)
-    #--------------------------------------------------------------------------
-    # Syntax:       free_kurt = κ₄(X)
-    # 
-    # Input:        X: a matrix, Hermitian or rectangular.
-    #
-    # Outputs:      free_kurt: a scalar, the free kurtosis of X
-    #   
-    # Description:  This function return the free kurtosis of a matrix X
-    # 
-    # Authors:      Hao Wu
-    #               lingluanwh@gmail.com
-    # 
-    # Date:         Jan 20, 2019
-    #--------------------------------------------------------------------------
+"""
+    κ₄(X)
 
+This function return the free kurtosis of a matrix X
+
+# Inputs
+-   X: a matrix, Hermitian or rectangular
+
+# Outputs
+-   fk: a scalar, the free kurtosis of X
+"""
+
+function κ₄(X)
     # get dimension
     N, M = size(X)
     
     # compute the free kurtosis
-    return tr((X*X')^2)/N - (1 + N/M) * (tr(X*X')/N)^2
+    fk = tr((X*X')^2)/N - (1 + N/M) * (tr(X*X')/N)^2
+    return fk
 end
+
+"""
+    neg_abs_sum_free_kurt(Z)
+
+This function calculates the sum of negative absolute value of free kurtosis of components of Z
+"""
 
 function neg_abs_sum_free_kurt(Z)
     #--------------------------------------------------------------------------
@@ -44,24 +48,20 @@ function neg_abs_sum_free_kurt(Z)
     return -sum(abs.(κ₄.(Z)))
 end
 
-function free_ent(X; mat = "her")
-    #--------------------------------------------------------------------------
-    # Syntax:       chi = free_ent(X, "her")
-    #               chi = free_ent(X, "rec")
-    # 
-    # Input:        X is a Hermitian or rectangular matrice
-    #               mat is the type of X, valid options are "her" and "rec"
-    #
-    # Outputs:      chi is a scalr, it is the free entropy of X
-    #   
-    # Description:  This function return the free entropy of a given matrix X, 
-    # 
-    # Authors:      Hao Wu
-    #               lingluanwh@gmail.com
-    # 
-    # Date:         Jan 20, 2019
-    #--------------------------------------------------------------------------
+"""
+    free_ent(X; mat = "her")
 
+This function return the free entropy of a matrix X
+
+# Inputs
+-   X: a matrix, Hermitian or rectangular
+-   mat: the type of X, valid options are "her" and "rec"
+
+# Outputs
+-   chi: a scalr, it is the free entropy of X
+"""
+
+function free_ent(X; mat = "her")
     # get dimension
     N, M = size(X)
     
@@ -69,37 +69,25 @@ function free_ent(X; mat = "her")
     # self-adjoint case
     if mat == "her"
         Λ = eigvals(Hermitian(X))
-        ent = mean(log.(abs.([Λ[i] - Λ[j] for i = 1:N for j = (i + 1):N])))
+        chi = mean(log.(abs.([Λ[i] - Λ[j] for i = 1:N for j = (i + 1):N])))
     end
                             
     # rectangular case                       
     if mat == "rec"
         a, b = N/(N + M), M/(N + M)
         Λ = svdvals(X*X')  
-        ent = a^2 * mean(log.(abs.([Λ[i] - Λ[j] for i = 1:N for j = (i + 1):N]))) + a*(b - a)*mean(log.(abs.(Λ)))
+        chi = a^2 * mean(log.(abs.([Λ[i] - Λ[j] for i = 1:N for j = (i + 1):N]))) + a*(b - a)*mean(log.(abs.(Λ)))
     end
                                                     
-    return ent                                               
+    return chi                                              
 end
-                                                    
-function sum_free_ent(Z; mat = "her")
-    #--------------------------------------------------------------------------
-    # Syntax:       sum_chi = sum_free_ent(Z, "her")
-    #               sum_chi = sum_free_ent(Z, "rec")
-    # 
-    # Input:        Z: a array of Hermitian or rectangular matrices
-    #               mat is the type of X, valid options are "her" and "rec"
-    #
-    # Outputs:      sum_chi: a scalr, it is the summation of free entropy of Z[i]
-    #   
-    # Description:  This function return the summation of free entropy of all 
-    #               components of the input
-    # 
-    # Authors:      Hao Wu
-    #               lingluanwh@gmail.com
-    # 
-    # Date:         Jan 20, 2019
-    #--------------------------------------------------------------------------
-    
+
+"""
+    sum_free_ent(Z; mat = "her")
+
+This function calculates the sum of free entropy of components of Z
+"""
+
+function sum_free_ent(Z; mat = "her")  
     return sum(free_ent.(Z, mat = mat))                                                   
 end

@@ -35,11 +35,11 @@ function err_pd(Ie)
 end
 
 tests = [
-    "fcf.jl",
     "embed.jl",
     "free_whiten.jl",
     "gradient.jl",
     "icf.jl",
+    "fcf.jl"
 ]
 
 # test embed

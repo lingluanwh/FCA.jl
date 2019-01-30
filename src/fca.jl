@@ -1,5 +1,9 @@
 # fca.jl
 
+"""
+Module providing the free componant analysis (FCA) algorithm.
+"""
+
 module fca
 
 # Package requried
