@@ -1,10 +1,10 @@
-# fca.jl
+# FCA.jl
 
-fca.jl is a package for [julia](https://julialang.org/) implementing [free component analysis](https://ieeexplore.ieee.org/document/7868999), which separates freely-independent random matrices out of their additive mixture.
+FCA.jl is a package for [julia](https://julialang.org/) implementing [free component analysis](https://ieeexplore.ieee.org/document/7868999), which separates freely-independent random matrices out of their additive mixture.
 ## Installation
 The package has not been registered in `METADATA.jl` and can be installed with `Pkg.clone`.
 ```julia
-julia> Pkg.clone("https://github.com/lingluanwh/fca.jl.git")
+julia> Pkg.clone("https://github.com/lingluanwh/FCA.jl")
 ```
 ## Example
 A typical example of the usage of fca.jl is
