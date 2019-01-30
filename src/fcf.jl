@@ -1,5 +1,5 @@
 """      
-    Aest, Xest = freecf(Z; mat="her", obj="kurt", opt="orth")
+    freecf(Z; mat="her", obj="kurt", opt="orth")
 
 Apply free component analysis to Z, return estimated
 mixing matrix and free components
