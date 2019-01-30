@@ -6,13 +6,12 @@
 This function calcualtes the gradient of neg_abs_sum_free_kurt(W'*Y) w.r.t W
 
 # Inputs
--   W: a matrix such that size(W, 1) = size(Y, 1)
--   Y: an array of matrix of same type and same dimension
+-   `W`: a matrix such that size(`W`, 1) = size(`Y`, 1)
+-   `Y`: an array of matrix of same type and same dimension
 
 # Outputs
--   grad: the gradient of neg_abs_sum_free_kurt(W'*Y) w.r.t W
+-   `grad`: the gradient of neg_abs_sum_free_kurt(W'*Y) w.r.t W
 """
-
 function grad_neg_abs_sum_free_kurt(W, Y)
     # convert W to matrix 
     W = W[:, :]
@@ -53,13 +52,12 @@ end
 This function calcualtes the gradient of sum_free_ent(W'*Y) w.r.t W
 
 # Inputs
--   W: a matrix such that size(W, 1) = size(Y, 1)
--   Y: an array of matrix of same type and same dimension
+-   `W`: a matrix such that size(W, 1) = size(Y, 1)
+-   `Y`: an array of matrix of same type and same dimension
 
 # Outputs
--   grad: the gradient of sum_free_ent(W'*Y) w.r.t W
+-   `grad`: the gradient of sum_free_ent(W'*Y) w.r.t W
 """
-
 function grad_sum_free_ent(W, Z; mat = "her")
     # convert W to matrix
     W = W[:, :]

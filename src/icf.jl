@@ -7,15 +7,14 @@
 Apply independent component analysis to Z, return estimated 
 mixing matrix and independent components
 
-# Inputs
--   Z: an array of vectors of the same length, represent the
+# Arguments
+-   `Z`: an array of vectors of the same length, represent the
        realizations of mixed independent signals
 
 # Outputs
--   Aest: estimated mixing matrix of size s-by-s, where s = size(Z,1)
--   Xest: estimated independent component Xest = pinv(Aest)*Z
+-   `Aest`: estimated mixing matrix of size `s`-by-`s`, where `s` = size(Z,1)
+-   `Xest`: estimated independent component `Xest = pinv(Aest)*Z`
 """
-
 function icf(Z::Array{Array{D, 1}, 1}; opt = "orth") where D <: Number
     # get number of the components and the dimension of each components
     s = size(Z,1)
@@ -88,7 +87,6 @@ end
 
 Calculate the sum of negative absolute value of kurtosis of rows of Z
 """
-
 function neg_abs_sum_kurt(Z)
     return -sum(abs.(kurt.(Z)))
 end
@@ -98,11 +96,11 @@ end
 
 This function returns the kurtosis of z   
 
-# Inputs
--   z: an vector regarded as independent realizations of a random variables
+# Arguments
+-   `z`: an vector regarded as independent realizations of a random variables
 
 # Outputs
--   k: a scalar, kurtosis of z
+-   `k`: a scalar, kurtosis of z
 """
 function kurt(z)
     #--------------------------------------------------------------------------
@@ -128,15 +126,14 @@ grad_neg_abs_sum_kurt(W, Z)
 
 This function calcualtes the gradient of neg_abs_sum_kurt(W'*Z) w.r.t W
 
-Inputs       
--   W: a matrix such that size(W, 1) = size(Z, 1)
--   Z: an array of vectors of the same length, regarded as the
+# Arguments       
+-   `W`: a matrix such that size(W, 1) = size(Z, 1)
+-   `Z`: an array of vectors of the same length, regarded as the
        realizations of mixed independent signals
 
-Outputs
--   grad: the gradient of neg_abs_sum_kurt(W'*Z) w.r.t W
+# Outputs
+-   `grad`: the gradient of neg_abs_sum_kurt(W'*Z) w.r.t W
 """
-
 function grad_neg_abs_sum_kurt(W, Z)
     # get number of components and dimension 
     s = size(Z, 1)

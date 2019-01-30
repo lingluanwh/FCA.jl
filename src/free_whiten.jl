@@ -2,17 +2,16 @@
     mat_center(X; mat = "her")
 
 This function centers input. 
-If X is a Hermitian matrix, then Xcen = X - Tr(X)/N*I.
-If X is a rectangular matrix, then Xcen = X - X*ones(M,1)*ones(1,M)/M.
+If X is a Hermitian matrix, then ``Xcen = X - Tr(X)/N*I```.
+If X is a rectangular matrix, then ``Xcen = X - X*ones(M,1)*ones(1,M)/M``.
 
-#Input:       
--   X: a Hermitian or rectangular matrix
--   mat: the type of X, valid options are "her" and "rec"
+# Arguments      
+-   `X`: a Hermitian or rectangular matrix
+-   `mat`: the type of `X`, valid options are "her" and "rec"
 
-#Output:
--   Xc: centered version of X
+# Outputs:
+-   `Xc`: centered version of `X`
 """
-
 function mat_center(X::Array{T,2}; mat = "her") where T <: Number
     N, M = size(X)
 
@@ -36,17 +35,16 @@ end
 
 This function whitens input array of matrices in the free probability sense
 
-# Inputs
--   Z: an array of matrices of mat and of the same dimensions
--   mat: the type of Z[i], valid options are "her" and "rec"
+# Arguments
+-   `Z`: an array of matrices of mat and of the same dimensions
+-   `mat`: the type of Z[i], valid options are "her" and "rec"
 
 # Outputs
--   Y: an array of centered matrices, whitened in the free probability sense, 
+-   `Y`: an array of centered matrices, whitened in the free probability sense, 
        that is, Tr(Y[i]*Y[j]')/size(Y[1],1) = (i == j)
--   U: a matrix of size s-by-s, where s = size(Z, 1)
--   Σ: a matrix of size s-by-s, 
+-   `U`: a matrix of size s-by-s, where s = size(Z, 1)
+-   `Σ`: a matrix of size s-by-s, 
 """
-
 function free_whiten(Z::Array{Array{T, 2}}; mat = "her") where T <: Number
     Zc = mat_center.(Z; mat = mat)
     N = size(Zc[1], 1)

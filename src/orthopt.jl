@@ -5,16 +5,15 @@ This function returns the opimizer of loss, whose feasible
 set is O(s), using the GradientDescent method from 
 Manifold optimization package Optim 
 
-# Input
--   loss: loss function whose input is a orthogonal matrix
--   grad: Euclidean gradient function of loss function w.r.t 
+# Arguments
+-   `loss`: loss function whose input is a orthogonal matrix
+-   `grad`: Euclidean gradient function of loss function w.r.t 
     to the orthogonal matrix
--   s: The feasible set is O(s)
+-   `s`: The feasible set is O(s)
                       
 # Outputs:      
--   Xopt: orthogonal matrix optmize loss function 
+-   `Xopt`: orthogonal matrix optmize loss function 
 """
-
 function OptOrtho(loss, grad, s)
     # use Stiefel manifold
     manif = Optim.Stiefel()
@@ -40,16 +39,15 @@ This function returns the opimizer of loss, whose feasible
 set is S(s - 1), using the GradientDescent method from 
 Manifold optimization package Optim 
 
-# Input
--   loss: loss function whose input is a orthogonal matrix
--   grad: Euclidean gradient function of loss function w.r.t 
+# Arguments
+-   `loss`: loss function whose input is a orthogonal matrix
+-   `grad`: Euclidean gradient function of loss function w.r.t 
     to the orthogonal matrix
--   s: The feasible set is S(s-1)
+-   `s`: The feasible set is S(s-1)
                       
 # Outputs:      
--   Xopt: orthogonal matrix optmize loss function 
+-   `Xopt`: orthogonal matrix optmize loss function 
 """
-
 function OptSphere(loss, grad, s)
     # use Sphere manifold
     manif = Optim.Sphere()

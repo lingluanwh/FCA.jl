@@ -5,13 +5,12 @@
 
 This function return the free kurtosis of a matrix X
 
-# Inputs
--   X: a matrix, Hermitian or rectangular
+# Arguments
+-   `X`: a matrix, Hermitian or rectangular
 
 # Outputs
--   fk: a scalar, the free kurtosis of X
+-   `fk`: a scalar, the free kurtosis of X
 """
-
 function κ₄(X)
     # get dimension
     N, M = size(X)
@@ -26,7 +25,6 @@ end
 
 This function calculates the sum of negative absolute value of free kurtosis of components of Z
 """
-
 function neg_abs_sum_free_kurt(Z)
     #--------------------------------------------------------------------------
     # Syntax:       F = neg_abs_sum_free_kurt(Z)
@@ -53,14 +51,13 @@ end
 
 This function return the free entropy of a matrix X
 
-# Inputs
--   X: a matrix, Hermitian or rectangular
--   mat: the type of X, valid options are "her" and "rec"
+# Arguments
+-   `X`: a matrix, Hermitian or rectangular
+-   `mat`: the type of X, valid options are "her" and "rec"
 
 # Outputs
--   chi: a scalr, it is the free entropy of X
+-   `chi`: a scalr, it is the free entropy of X
 """
-
 function free_ent(X; mat = "her")
     # get dimension
     N, M = size(X)
@@ -87,7 +84,6 @@ end
 
 This function calculates the sum of free entropy of components of Z
 """
-
 function sum_free_ent(Z; mat = "her")  
     return sum(free_ent.(Z, mat = mat))                                                   
 end

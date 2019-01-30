@@ -4,17 +4,16 @@
 Apply free component analysis to Z, return estimated
 mixing matrix and free components
 
-# Inputs       
--   Z: an array of matrices of mat and of the same dimensions
--   mat: the type of Z[i], valid options are "her" and "rec"
--   obj: the type of loss function, valid options are "kurt" and "ent"
--   opt: string, valid option: "orth", "sphe"
+# Arguments      
+-   `Z`: an array of matrices of mat and of the same dimensions
+-   `mat`: the type of Z[i], valid options are "her" and "rec"
+-   `obj`: the type of loss function, valid options are "kurt" and "ent"
+-   `opt`: string, valid option: "orth", "sphe"
 
 # Outputs     
--   Aest: a matrix of size s-by-s
--   Xest: an array of "free" matrices, such that Z = Aest*Xest
+-   `Aest`: a matrix of size `s`-by-`s`, where `s` = size(Z, 1)
+-   `Xest`: an array of "free" matrices, such that `Z = Aest*Xest`
 """
-
 function freecf(Z; mat="her", obj="kurt", opt="orth")
     
     # freecf is not designed for obj = "ent" and opt = "sphe"
