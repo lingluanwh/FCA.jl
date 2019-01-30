@@ -1,4 +1,4 @@
-# fca.jl
+# FCA.jl
 
 """
 Module providing the free componant analysis (FCA) algorithm.
