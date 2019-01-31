@@ -2,7 +2,7 @@
 # We will compare FCF with ICF
 
 """
-    icf(Z, opt = "orth")
+    icf(Z; opt = "orth")
 
 Apply independent component analysis to Z, return estimated 
 mixing matrix and independent components
@@ -10,6 +10,7 @@ mixing matrix and independent components
 # Arguments
 -   `Z`: an array of vectors of the same length, represent the
        realizations of mixed independent signals
+-   `opt`: string, type of optimization, valid option: "orth", "sphe"
 
 # Outputs
 -   `Aest`: estimated mixing matrix of size `s`-by-`s`, where `s` = size(Z,1)
