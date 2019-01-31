@@ -5,7 +5,7 @@
 
 This function calcualtes the gradient of neg_abs_sum_free_kurt(W'*Y) w.r.t W
 
-# Inputs
+# Arguments
 -   `W`: a matrix such that size(`W`, 1) = size(`Y`, 1)
 -   `Y`: an array of matrix of same type and same dimension
 
@@ -51,7 +51,7 @@ end
 
 This function calcualtes the gradient of sum_free_ent(W'*Y) w.r.t W
 
-# Inputs
+# Arguments
 -   `W`: a matrix such that size(W, 1) = size(Y, 1)
 -   `Y`: an array of matrix of same type and same dimension
 
