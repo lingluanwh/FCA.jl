@@ -8,7 +8,7 @@ mixing matrix and free components
 -   `Z`: an array of matrices of mat and of the same dimensions
 -   `mat`: the type of Z[i], valid options are "her" and "rec"
 -   `obj`: the type of loss function, valid options are "kurt" and "ent"
--   `opt`: string, valid option: "orth", "sphe"
+-   `opt`: string, type of optimization, valid option: "orth", "sphe"
 
 # Outputs     
 -   `Aest`: a matrix of size `s`-by-`s`, where `s` = size(Z, 1)
