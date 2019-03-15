@@ -23,7 +23,7 @@ function mat_center(X::Array{T,2}; mat = "her") where T <: Number
         Xc = X - I*tr(X)/M
     elseif mat == "rec"
         # for rectangular matrix, A = A - A*ones(m, 1)*ones(1, m)/m
-        Xc = X - X*ones(M, 1)/M * ones(1, M)
+        Xc = X - mean(X)*ones(N, M)
     end
 
     return Xc
