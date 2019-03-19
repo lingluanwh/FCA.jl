@@ -10,7 +10,7 @@
     # test for rectangular case
     if mat == "rec"
         for idx = 1: 10
-            @test sum(abs.(mean(mat_center(randn(3,3); mat ="rec"), dims = 2))) <= 3*eps(Float64)
+            @test sum(vec(mat_center(randn(3,3); mat ="rec"))) <= 3*eps(Float64)
         end
     end
 end

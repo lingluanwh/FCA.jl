@@ -79,5 +79,18 @@ function freecf(Z; mat="her", obj="kurt", opt="orth")
     # and free components
     Aest = U*Σ*U'*What;
     Xest = pinv(Aest) * Z;
+
+    # order Xest by the descending order of absolute free kurtosis if obj = "kurt"
+    if obj == "kurt"
+        order = sortperm(Xest, by = X -> -abs(κ₄(X)))
+        Xest = Xest[order]
+        Aest = Aest[:,order]
+    # order Xest by the aescending order of the free entropy
+    elseif obj == "ent"
+        order = sortperm(Xest, by = X -> free_ent(X; mat=mat))
+        Xest = Xest[order]
+        Aest = Aest[:,order]
+    end
+
     return Aest, Xest
 end
