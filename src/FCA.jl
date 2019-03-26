@@ -38,7 +38,10 @@ export  freecf, # main function
         icf,
         kurt,
         neg_abs_sum_kurt,
-        grad_neg_abs_sum_kurt
+        grad_neg_abs_sum_kurt,
+
+        # errpd
+        err_pd
 
 # include sources
 include("loss.jl")
@@ -48,6 +51,7 @@ include("free_whiten.jl")
 include("embed.jl")
 include("icf.jl")
 include("orthopt.jl")
+include("errpd.jl")
 
 end
 
