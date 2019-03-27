@@ -79,6 +79,11 @@ function icf(Z::Array{Array{D, 1}, 1}; opt = "orth") where D <: Number
     Aest = U*Σ*U'*W
     xest = pinv(Aest) * Z
 
+    # order Xest by the descending order of absolute free kurtosis if obj = "kurt"
+    order = sortperm(xest, by = x -> neg_abs_sum_kurt(x))
+    xest = xest[order]
+    Aest = Aest[:,order]
+
     return Aest, xest
 end
 
