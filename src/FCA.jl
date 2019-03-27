@@ -10,6 +10,7 @@ using Optim # for manifold optimization
 using LinearAlgebra
 using GenericLinearAlgebra
 using Statistics
+using Combinatorics
 
 
 import StatsBase: sample # for sample in embed.jl
