@@ -26,7 +26,7 @@ function freecf(Z; mat="her", obj="kurt", opt="orth")
     s = size(Z, 1)
     
     # check whether the dimension with the mat
-    if (mat == "sym") && (N != M)
+    if (mat == "her") && (N != M)
         error("The input components are not a Hermitian matrix")
     end
     
