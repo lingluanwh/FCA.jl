@@ -1,4 +1,5 @@
 # FCA.jl
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2655935.svg)](https://doi.org/10.5281/zenodo.2655935)
 
 FCA.jl is a package for [julia](https://julialang.org/) implementing [free component analysis](https://ieeexplore.ieee.org/document/7868999), which separates freely-independent random matrices out of their additive mixture.
 ## Installation
