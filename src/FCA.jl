@@ -40,6 +40,9 @@ export  freecf, # main function
         kurt,
         neg_abs_sum_kurt,
         grad_neg_abs_sum_kurt,
+        negent,
+        ent_sum,
+        grad_ent_sum,
 
         # errpd
         err_pd

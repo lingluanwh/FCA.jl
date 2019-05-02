@@ -3,14 +3,14 @@
     # test for Hermitian matrix
     if mat == "her"
         for idx = 1: 10
-            @test abs(tr(mat_center(randn(3,3); mat = mat))) <= 3*eps(Float64);
+            @test abs(tr(mat_center(randn(3,3); mat = mat))) <= 10*eps(Float64);
         end
     end
 
     # test for rectangular case
     if mat == "rec"
         for idx = 1: 10
-            @test sum(vec(mat_center(randn(3,3); mat ="rec"))) <= 3*eps(Float64)
+            @test sum(vec(mat_center(randn(3,3); mat ="rec"))) <= 10*eps(Float64)
         end
     end
 end
