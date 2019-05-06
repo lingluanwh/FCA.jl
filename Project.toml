@@ -1,7 +1,7 @@
 name = "FCA"
 uuid = "9ac0d1d1-ab1e-5a44-888c-d389b307372d"
 license = "MIT"
-version = "0.2.1"
+version = "0.2.2"
 
 [deps]
 Combinatorics = "861a8166-3701-5b0c-9a16-15d98fcdc6aa"
