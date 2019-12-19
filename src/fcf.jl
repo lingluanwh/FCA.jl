@@ -14,8 +14,7 @@ mixing matrix and free components
 -   `Aest`: a matrix of size `s`-by-`s`, where `s` = size(Z, 1)
 -   `Xest`: an array of "free" matrices, such that `Z = Aest*Xest`
 """
-function freecf(Z; mat="her", obj="kurt", opt="orth")
-    
+function freecf(Z; mat="her", obj="kurt", opt="orth", opt_config=nothing)
     # freecf is not designed for obj = "ent" and opt = "sphe"
     if (obj == "ent") & (opt == "sphe")
         error("Spherical optimization is not designed for entropy based fcf!")
@@ -54,7 +53,7 @@ function freecf(Z; mat="her", obj="kurt", opt="orth")
     
     # optimization over the orthogonal matrix
     if opt == "orth"
-        What = OptOrtho(W -> F(W, Y), W -> grad_F(W, Y), s);
+        What = OptOrtho(W -> F(W, Y), W -> grad_F(W, Y), s; opt_conifg=opt_config);
     elseif opt == "sphe"
         # recover the columns of W one-by-one 
         # first column
@@ -67,7 +66,7 @@ function freecf(Z; mat="her", obj="kurt", opt="orth")
             # updated loss function
             
             # find i th column, attach it to W
-            Wi = OptSphere(W -> F(W, pY), W -> grad_F(W, pY), s)
+            Wi = OptSphere(W -> F(W, pY), W -> grad_F(W, pY), s; opt_config=opt_config)
             What = (qr(hcat(What, Wi)).Q)[:, 1:i]
         end
 

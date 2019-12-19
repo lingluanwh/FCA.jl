@@ -3,3 +3,6 @@ test/test_ipynb/*
 
 .ipynb_checkpoints/
 example/video components/*
+*.mat # ignore mat data file
+*.jld # ignore jld data file
+*.m # ignore matlab script
