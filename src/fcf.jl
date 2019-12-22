@@ -53,11 +53,11 @@ function freecf(Z; mat="her", obj="kurt", opt="orth", opt_config=nothing)
     
     # optimization over the orthogonal matrix
     if opt == "orth"
-        What = OptOrtho(W -> F(W, Y), W -> grad_F(W, Y), s; opt_conifg=opt_config);
+        What = OptOrtho(W -> F(W, Y), W -> grad_F(W, Y), s; opt_config=opt_config);
     elseif opt == "sphe"
         # recover the columns of W one-by-one 
         # first column
-        What = reshape(OptSphere(W -> F(W, Y), W -> grad_F(W, Y), s), :, 1)
+        What = reshape(OptSphere(W -> F(W, Y), W -> grad_F(W, Y), s; opt_config=opt_config), :, 1)
 
         # find 2nd to s-1th column one at a time
         for i = 2: (s - 1)

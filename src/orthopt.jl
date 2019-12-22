@@ -33,7 +33,7 @@ function OptOrtho(loss, grad, s; opt_config=nothing)
     # gradient descent method, the Euclidean gradient 
     # is given by grad
     optimres = Optim.optimize(loss, grad, X0, 
-        Optim.GradientDescent(manifold=manif); inplace = false)
+        Optim.GradientDescent(manifold=manif), opt_config; inplace = false)
     
     # extract and return the minimizer
     Xopt = Optim.minimizer(optimres)
@@ -64,7 +64,7 @@ function OptSphere(loss, grad, s; opt_config=nothing)
                                     g_tol = 1e-8,
                                     iterations = 1_000)
     end
-    
+
     # use Sphere manifold
     manif = Optim.Sphere()
 
@@ -76,7 +76,7 @@ function OptSphere(loss, grad, s; opt_config=nothing)
     # gradient descent method, the Euclidean gradient 
     # is given by grad
     optimres = Optim.optimize(loss, grad, x0, 
-        Optim.GradientDescent(manifold=manif); inplace = false)
+        Optim.GradientDescent(manifold=manif), opt_config; inplace = false)
 
     # extract and return the minimizer
     xopt = Optim.minimizer(optimres)

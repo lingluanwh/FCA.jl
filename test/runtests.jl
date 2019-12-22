@@ -1,5 +1,6 @@
 push!(LOAD_PATH, "../src/")
-using FCA
+include("../src/FCA.jl")
+using Main.FCA
 using Test
 using Combinatorics, ForwardDiff, LinearAlgebra, Statistics
 
